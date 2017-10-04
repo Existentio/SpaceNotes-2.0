@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SpaceNotesMvc</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_settings">settings</string>
+    <string name="menu_add">menu add</string>
+    <string name="menu_save_note" translatable="true">save note</string>
+    <string name="menu_back" translatable="true">back</string>
+
+    <string name="hint_text">Введите текст..</string>
+    <string name="send_to">Отправить в...</string>
+
+</resources>

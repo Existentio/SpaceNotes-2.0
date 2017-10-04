@@ -1,0 +1,23 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frame_edit"
+    android:background="@drawable/neo_design_edit_text"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="16dp"
+    tools:context="com.existentio.spacenotesmvc.ui.EditNoteFragment">
+
+    <EditText
+        android:padding="10dp"
+        android:id="@+id/edit_tv"
+        android:gravity="top"
+        android:textColor="@color/neo_text"
+        android:layout_width="match_parent"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
+
+</FrameLayout>

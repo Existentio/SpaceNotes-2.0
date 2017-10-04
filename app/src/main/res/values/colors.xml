@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="white">#f9ffffff</color>
+
+
+    <color name="newitem">#c1121954</color>
+    <color name="newitem_edit">#121954</color>
+
+    <color name="neo_text">#84FFFF</color>
+    <color name="text_menu">#FFCDD2</color>
+
+    <color name="bright_violet">#EA80FC</color>
+
+    <color name="black">#020101</color>
+    <color name="fourdesign">#7B1FA2</color>
+    <color name="pale_black">#7f020101</color>
+    <color name="testback">#232c83</color>
+    <color name="testback_half">#e33a4291</color>
+    <color name="neo_text_half">#3a84ffff</color>
+
+    <color name="black_dim">#9d000000</color>
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>
