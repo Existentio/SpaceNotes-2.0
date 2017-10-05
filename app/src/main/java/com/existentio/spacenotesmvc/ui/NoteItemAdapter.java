@@ -81,9 +81,8 @@ public class NoteItemAdapter extends RecyclerView.Adapter<NoteItemAdapter.ViewHo
     public interface OnItemClickListener {
         void onItemSelected(Notes noteItem);
     }
-
-
-    public static class ViewHolder extends RecyclerView.ViewHolder { //was non-static
+    
+    public class ViewHolder extends RecyclerView.ViewHolder { //was non-static
         private TextView description;
         private TextView date;
 

@@ -8,9 +8,9 @@
         android:title="@string/menu_settings"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_menu_space_settings" />
-    <item
-        android:id="@+id/action_add"
-        android:title="@string/menu_add"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_menu_space_add" />
+    <!--<item-->
+        <!--android:id="@+id/action_add_internal"-->
+        <!--android:title="@string/menu_add"-->
+        <!--app:showAsAction="ifRoom"-->
+        <!--android:icon="@drawable/ic_menu_space_add" />-->
 </menu>

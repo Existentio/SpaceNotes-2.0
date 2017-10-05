@@ -80,32 +80,10 @@ public class BaseFragment extends Fragment implements NoteItemAdapter.OnItemClic
         adapter.notifyDataSetChanged();
     }
 
-    public void saveToDb() {
-//        DBHelper db = new DBHelper(this);
-        EditText etText = (EditText) getActivity().findViewById(R.id.et_enter_text);
-        String text = etText.getText().toString();
-        String date = DateFormat.getDateInstance
-                (DateFormat.SHORT).format(Calendar.getInstance().getTime());
-        if (text.isEmpty()) {
-//            Toast.makeText(this, "empty note", Toast.LENGTH_SHORT).show();
-        } else {
-            db.addNote(text, date);
-//            db.updRec(text, date, adapter.getListId());
-
-//            showToast(R.string.note_added);
-//            Toast.makeText(this, "note added", Toast.LENGTH_SHORT).show();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_container, this)
-                    .commit();
-            refresh();
-        }
-    }
-
     public void refresh() {
         adapter.notifyDataSetChanged();
 
     }
-
 
     private void initApps(List<Notes> list) {
         adapter.setNotes(list);
@@ -130,7 +108,7 @@ public class BaseFragment extends Fragment implements NoteItemAdapter.OnItemClic
                 .addToBackStack("frags")
                 .commit();
         Bundle bundle = new Bundle();
-        bundle.putString("test", noteItem.getDescription());
+        bundle.putString("appearance", noteItem.getDescription());
         editNoteFragment.setArguments(bundle);
     }
 

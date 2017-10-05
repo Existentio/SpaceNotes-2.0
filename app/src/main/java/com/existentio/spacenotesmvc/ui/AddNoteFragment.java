@@ -23,7 +23,7 @@ import java.util.Calendar;
 
 public class AddNoteFragment extends Fragment {
 
-    EditText etText;
+     EditText etText;
 
     public AddNoteFragment() {
         // Required empty public constructor

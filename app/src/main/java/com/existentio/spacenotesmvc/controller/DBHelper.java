@@ -22,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_DATE = "date";
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 1;
 
     private static final String CREATE_TABLE_NOTES =
             "CREATE TABLE " + TABLE_NOTES + "(" +
@@ -70,7 +70,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.delete(TABLE_NOTES, COLUMN_ID + "=" + id, null) > 0;
     }
 
-    public void updRec(String description, String date, long id) {
+    public void updNote(String description, String date, long id) {
         ContentValues args = new ContentValues();
         args.put(COLUMN_DESCRIPTION, description);
         args.put(COLUMN_DATE, date);

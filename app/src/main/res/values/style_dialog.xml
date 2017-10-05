@@ -3,6 +3,6 @@
     <style name="Theme.Notepad.Dialog" parent="Base.Theme.AppCompat.Dialog.Alert">
         <item name="android:textColor">@color/bright_violet</item>
         <item name="@android:windowBackground">@drawable/new_settings</item>
-
+        <item name="@android:windowNoTitle">true</item>
     </style>
 </resources>

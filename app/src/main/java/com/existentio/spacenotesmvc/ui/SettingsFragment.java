@@ -79,24 +79,25 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         getActivity().getMenuInflater().inflate(R.menu.menu_settings, menu);
     }
 
-    public void killFragment() {
-//        getActivity().getSupportFragmentManager().popBackStack();
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .detach(this)
-                .commit();
+    private void animButtons(View... view) {
+        for (final View v : view) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.appearance);
+                    v.startAnimation(animation);
+                }
+            });
+        }
     }
-
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.btn_theme:
                 if (!llTop.isShown()) {
                     llTop.setVisibility(View.VISIBLE);
-                    Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.test);
-//                    animation.setInterpolator(Increase);
-                    llTop.startAnimation(animation);
+                    animButtons(llTop);
                 } else llTop.setVisibility(View.INVISIBLE);
                 break;
 
@@ -116,7 +117,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btn_display_date:
-
+//                btnDate.setBackgroundResource(R.drawable.hexagon_pressed);
+                PrefHelper prefDate = new PrefHelper();
+                prefDate.setPref("pref_date");
+                PrefHelper.putInSharedPrefs(prefDate.getPref(), getContext(), "theme", "first");
                 break;
 
             case R.id.btn_font:
@@ -131,4 +135,5 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         }
 
     }
+
 }

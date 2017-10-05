@@ -18,9 +18,8 @@ import java.util.Calendar;
 
 public class EditNoteFragment extends Fragment {
 
-    EditText textView;
-    String args;
-    private static  int ID = 0;
+     EditText textView;
+     String args;
 
     public EditNoteFragment() {
     }
@@ -35,7 +34,7 @@ public class EditNoteFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-             args = bundle.getString("test");
+             args = bundle.getString("appearance");
         }
         setHasOptionsMenu(true);
     }

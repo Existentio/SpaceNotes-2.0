@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -24,20 +23,22 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static android.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE;
 import static android.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
 
 public class MainActivity extends AppCompatActivity {
     public static List<Notes> notes = new ArrayList<>();
 
-    Toolbar toolbar;
+    private Toolbar toolbar;
     private DBHelper db;
     private RelativeLayout container;
     private NoteItemAdapter adapter = new NoteItemAdapter(this);
-
     private String theme;
+    private BaseFragment baseFragment;
+    private SettingsFragment settingsFragment;
 
-    BaseFragment fragment;
-    SettingsFragment settingsFragment;
+    private static final int ADD_NOTE = 100;
+    private static final int EDIT_NOTE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +48,18 @@ public class MainActivity extends AppCompatActivity {
         db = new DBHelper(this);
 
         initToolbar();
-
         initBaseView();
     }
 
     private void initBaseView() {
-        fragment = BaseFragment.newInstance();
+        baseFragment = BaseFragment.newInstance();
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.main_container, fragment)
+                .add(R.id.main_container, baseFragment)
                 .commit();
-        fragment.getFragmentManager().beginTransaction()
-                .detach(fragment)
-                .attach(fragment)
+        baseFragment.getFragmentManager().beginTransaction()
+                .detach(baseFragment)
+                .attach(baseFragment)
                 .commit();
     }
 
@@ -73,19 +73,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        SharedPreferences pref = this.getSharedPreferences(this.getPackageName() + "_preferences", Context.MODE_PRIVATE);
-//        theme = pref.getString("theme", "light-sans");
-
         initSettings();
     }
 
     private void initSettings() {
         SharedPreferences spTheme = getSharedPreferences(PrefHelper.PREF_THEME,
                 Context.MODE_PRIVATE);
+        SharedPreferences spDate = getSharedPreferences(PrefHelper.PREF_DATE,
+                Context.MODE_PRIVATE);
 
         if (spTheme.contains(PrefHelper.KEY_THEME)) {
-            container.setBackgroundResource(R.drawable.menu_background);
+//            container.setBackgroundResource(R.drawable.menu_background);
+            container.setBackgroundResource(R.drawable.spacetheme);
         }
+
+        if (spDate.contains(PrefHelper.KEY_DATE)) {
+//            container.setBackgroundResource(R.drawable.menu_background);
+//            container.setBackgroundResource(R.drawable.spacetheme);
+        }
+
 
     }
 
@@ -98,13 +104,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.action_add:
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.main_container, AddNoteFragment.newInstance())
                         .setTransition(TRANSIT_FRAGMENT_OPEN)
                         .addToBackStack("frags")
-//                        .addToBackStack(null)
                         .commit();
                 break;
 
@@ -114,27 +118,32 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.main_container, settingsFragment)
                             .setTransition(TRANSIT_FRAGMENT_OPEN)
-//                            .addToBackStack("frags")
-                            .addToBackStack(null)
                             .commit();
                 }
                 break;
 
             case R.id.action_save:
                 Toast.makeText(this, "Note have saved", Toast.LENGTH_LONG).show();
-                saveToDb();
-                fragment.getFragmentManager().beginTransaction()
-                        .detach(fragment)
-                        .attach(fragment)
-                        .commit();
-                if (!fragment.isVisible()) {
-                    startActivity(new Intent(this, MainActivity.class));
+                saveToDb(fetchData(ADD_NOTE));
+                if (baseFragment.isAdded()) {
+                    getSupportFragmentManager().beginTransaction()
+                            .detach(baseFragment)
+                            .attach(baseFragment)
+                            .replace(R.id.main_container, baseFragment)
+                            .commit();
                 }
                 break;
 
             case R.id.action_back:
-            case R.id.action_settings_internal:
                 onBackPressed();
+                break;
+
+            case R.id.action_settings_internal:
+                getSupportFragmentManager().beginTransaction()
+                        .detach(settingsFragment)
+                        .replace(R.id.main_container, baseFragment)
+                        .setTransition(TRANSIT_FRAGMENT_CLOSE)
+                        .commit();
                 break;
 
             case R.id.action_share:
@@ -152,42 +161,49 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_back_sv:
-                updToDb();
-                fragment.getFragmentManager().beginTransaction()
-                        .detach(fragment)
-                        .attach(fragment)
+                updToDb(fetchData(EDIT_NOTE));
+                baseFragment.getFragmentManager().beginTransaction()
+                        .detach(baseFragment)
+                        .attach(baseFragment)
                         .commit();
-                if (!fragment.isVisible()) {
+                if (!baseFragment.isVisible()) {
                     startActivity(new Intent(this, MainActivity.class));
+                    finish();
                 }
                 break;
         }
         return true;
     }
 
-    public void saveToDb() {
-        EditText etText = (EditText) findViewById(R.id.et_enter_text);
+    private String[] fetchData(int action) {
+        EditText etText = (EditText)
+                (action == ADD_NOTE ? findViewById(R.id.et_enter_text) : findViewById(R.id.edit_tv));
         String text = etText.getText().toString();
         String date = DateFormat.getDateInstance
                 (DateFormat.SHORT).format(Calendar.getInstance().getTime());
-        if (text.isEmpty()) {
+        String id = String.valueOf(adapter.getListId());
+
+        String[] data = {text, date, id};
+        return data;
+    }
+
+    public void saveToDb(String... data) {
+        if (data[0].isEmpty()) {
             Toast.makeText(this, "empty note", Toast.LENGTH_SHORT).show();
         } else {
-            db.addNote(text, date);
+            db.addNote(data[0], data[1]);
             Toast.makeText(this, "note added", Toast.LENGTH_SHORT).show();
             onBackPressed();
         }
     }
 
-    public void updToDb() {
-        EditText etText = (EditText) findViewById(R.id.edit_tv);
-        String text = etText.getText().toString();
-        String date = DateFormat.getDateInstance
-                (DateFormat.SHORT).format(Calendar.getInstance().getTime());
-        if (text.isEmpty()) {
+    public void updToDb(String... data) {
+        long _id = Long.parseLong(data[2]);
+
+        if (data[0].isEmpty()) {
             Toast.makeText(this, "empty note", Toast.LENGTH_SHORT).show();
         } else {
-            db.updRec(text, date, adapter.getListId());
+            db.updNote(data[0], data[1], _id);
             Log.d("id", String.valueOf(adapter.getListId()));
             Toast.makeText(this, "rarara!", Toast.LENGTH_SHORT).show();
             onBackPressed();
@@ -197,11 +213,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (AddNoteFragment.newInstance() != null) {
-//            toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
             super.onBackPressed();
-
         }
-
     }
 
 }
