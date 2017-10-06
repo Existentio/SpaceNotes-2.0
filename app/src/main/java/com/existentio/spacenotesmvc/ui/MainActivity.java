@@ -1,5 +1,7 @@
 package com.existentio.spacenotesmvc.ui;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,7 +26,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import static android.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE;
-import static android.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
+import static com.existentio.spacenotesmvc.util.SomeCondition.CONDITION_ADD;
+import static com.existentio.spacenotesmvc.util.SomeCondition.CONDITION_FOUR;
+import static com.existentio.spacenotesmvc.util.SomeCondition.CONDITION_SAVE;
+import static com.existentio.spacenotesmvc.util.SomeCondition.CONDITION_TWO;
 
 public class MainActivity extends AppCompatActivity {
     public static List<Notes> notes = new ArrayList<>();
@@ -105,33 +110,17 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.main_container, AddNoteFragment.newInstance())
-                        .setTransition(TRANSIT_FRAGMENT_OPEN)
-                        .addToBackStack("frags")
-                        .commit();
+                CONDITION_ADD.someMethod(baseFragment, AddNoteFragment.newInstance());
                 break;
 
             case R.id.action_settings:
-                settingsFragment = SettingsFragment.newInstance();
-                if (!settingsFragment.isAdded()) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_container, settingsFragment)
-                            .setTransition(TRANSIT_FRAGMENT_OPEN)
-                            .commit();
-                }
+                CONDITION_TWO.someMethod(baseFragment, SettingsFragment.newInstance());
                 break;
 
             case R.id.action_save:
                 Toast.makeText(this, "Note have saved", Toast.LENGTH_LONG).show();
                 saveToDb(fetchData(ADD_NOTE));
-                if (baseFragment.isAdded()) {
-                    getSupportFragmentManager().beginTransaction()
-                            .detach(baseFragment)
-                            .attach(baseFragment)
-                            .replace(R.id.main_container, baseFragment)
-                            .commit();
-                }
+                CONDITION_SAVE.someMethod(baseFragment, null);
                 break;
 
             case R.id.action_back:
@@ -139,38 +128,48 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_settings_internal:
-                getSupportFragmentManager().beginTransaction()
-                        .detach(settingsFragment)
+//                CONDITION_FOUR.someMethod(baseFragment, settingsFragment);
+//                settingsFragment = SettingsFragment.newInstance();
+               settingsFragment.getFragmentManager().beginTransaction()
+//                        .detach(settingsFragment)
+//                        .attach(baseFragment)
                         .replace(R.id.main_container, baseFragment)
                         .setTransition(TRANSIT_FRAGMENT_CLOSE)
                         .commit();
-                break;
+            break;
 
             case R.id.action_share:
-                String contents = EditNoteFragment.newInstance().textView.getText().toString();
-                if (contents.equals("")) {
-
-                } else {
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_SEND);
-                    intent.putExtra(Intent.EXTRA_TEXT, contents);
-                    intent.setType("text/plain");
-                    if (intent.resolveActivity(this.getPackageManager()) != null)
-                        startActivity(Intent.createChooser(intent, getResources().getText(R.string.send_to)));
-                }
                 break;
 
             case R.id.action_back_sv:
                 updToDb(fetchData(EDIT_NOTE));
-                baseFragment.getFragmentManager().beginTransaction()
-                        .detach(baseFragment)
-                        .attach(baseFragment)
-                        .commit();
+                CONDITION_SAVE.someMethod(baseFragment, null);
+
                 if (!baseFragment.isVisible()) {
                     startActivity(new Intent(this, MainActivity.class));
                     finish();
                 }
                 break;
+
+
+//
+//
+//
+//            case R.id.action_share:
+//                String contents = EditNoteFragment.newInstance().textView.getText().toString();
+//                if (contents.equals("")) {
+//
+//                } else {
+//                    Intent intent = new Intent();
+//                    intent.setAction(Intent.ACTION_SEND);
+//                    intent.putExtra(Intent.EXTRA_TEXT, contents);
+//                    intent.setType("text/plain");
+//                    if (intent.resolveActivity(this.getPackageManager()) != null)
+//                        startActivity(Intent.createChooser(intent, getResources().getText(R.string.send_to)));
+//                }
+//                break;
+//
+
         }
         return true;
     }

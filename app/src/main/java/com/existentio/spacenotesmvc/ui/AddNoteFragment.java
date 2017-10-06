@@ -70,5 +70,4 @@ public class AddNoteFragment extends Fragment {
 
 
 
-
 }
