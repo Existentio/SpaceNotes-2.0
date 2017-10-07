@@ -11,10 +11,6 @@ import com.existentio.spacenotesmvc.ui.MainActivity;
 
 import java.util.List;
 
-/**
- * Created by Георгий on 19.09.2017.
- */
-
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "sn.db";

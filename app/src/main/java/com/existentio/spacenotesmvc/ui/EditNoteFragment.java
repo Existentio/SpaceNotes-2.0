@@ -1,6 +1,5 @@
 package com.existentio.spacenotesmvc.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,9 +10,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.existentio.spacenotesmvc.R;
-
-import java.text.DateFormat;
-import java.util.Calendar;
 
 
 public class EditNoteFragment extends Fragment {
@@ -43,8 +39,6 @@ public class EditNoteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_note, container, false);
-//        int position = new NoteItemAdapter.ViewHolder(view).getId();
-
         textView = (EditText)view.findViewById(R.id.edit_tv);
         textView.setText(args);
         return view;

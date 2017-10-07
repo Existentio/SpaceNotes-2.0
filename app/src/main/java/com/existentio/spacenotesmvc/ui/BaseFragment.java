@@ -3,21 +3,19 @@ package com.existentio.spacenotesmvc.ui;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.existentio.spacenotesmvc.R;
 import com.existentio.spacenotesmvc.controller.DBHelper;
 import com.existentio.spacenotesmvc.model.Notes;
+import com.existentio.spacenotesmvc.util.FragmentConditions;
 import com.existentio.spacenotesmvc.util.RecyclerItemSwiper;
 
-import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 import static android.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
@@ -102,11 +100,8 @@ public class BaseFragment extends Fragment implements NoteItemAdapter.OnItemClic
     @Override
     public void onItemSelected(Notes noteItem) {
         EditNoteFragment editNoteFragment = EditNoteFragment.newInstance();
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_container, editNoteFragment)
-                .setTransition(TRANSIT_FRAGMENT_OPEN)
-                .addToBackStack("frags")
-                .commit();
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentConditions.CONDITION_EDIT.replace(null, editNoteFragment, fm);
         Bundle bundle = new Bundle();
         bundle.putString("appearance", noteItem.getDescription());
         editNoteFragment.setArguments(bundle);

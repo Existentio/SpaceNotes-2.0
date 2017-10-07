@@ -1,11 +1,10 @@
 package com.existentio.spacenotesmvc.ui;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,17 +18,16 @@ import com.existentio.spacenotesmvc.R;
 import com.existentio.spacenotesmvc.controller.DBHelper;
 import com.existentio.spacenotesmvc.data.PrefHelper;
 import com.existentio.spacenotesmvc.model.Notes;
+import com.existentio.spacenotesmvc.util.FragmentConditions;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static android.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE;
-import static com.existentio.spacenotesmvc.util.SomeCondition.CONDITION_ADD;
-import static com.existentio.spacenotesmvc.util.SomeCondition.CONDITION_FOUR;
-import static com.existentio.spacenotesmvc.util.SomeCondition.CONDITION_SAVE;
-import static com.existentio.spacenotesmvc.util.SomeCondition.CONDITION_TWO;
+import static com.existentio.spacenotesmvc.util.FragmentConditions.CONDITION_ADD;
+import static com.existentio.spacenotesmvc.util.FragmentConditions.CONDITION_SAVE;
+import static com.existentio.spacenotesmvc.util.FragmentConditions.CONDITION_SETTINGS;
 
 public class MainActivity extends AppCompatActivity {
     public static List<Notes> notes = new ArrayList<>();
@@ -110,17 +108,17 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-                CONDITION_ADD.someMethod(baseFragment, AddNoteFragment.newInstance());
+                CONDITION_ADD.replace(baseFragment, AddNoteFragment.newInstance(), null);
                 break;
 
             case R.id.action_settings:
-                CONDITION_TWO.someMethod(baseFragment, SettingsFragment.newInstance());
+                CONDITION_SETTINGS.replace(baseFragment, SettingsFragment.newInstance(), null);
                 break;
 
             case R.id.action_save:
                 Toast.makeText(this, "Note have saved", Toast.LENGTH_LONG).show();
                 saveToDb(fetchData(ADD_NOTE));
-                CONDITION_SAVE.someMethod(baseFragment, null);
+                CONDITION_SAVE.replace(baseFragment, null, null);
                 break;
 
             case R.id.action_back:
@@ -128,14 +126,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_settings_internal:
-//                CONDITION_FOUR.someMethod(baseFragment, settingsFragment);
-//                settingsFragment = SettingsFragment.newInstance();
-               settingsFragment.getFragmentManager().beginTransaction()
-//                        .detach(settingsFragment)
-//                        .attach(baseFragment)
-                        .replace(R.id.main_container, baseFragment)
-                        .setTransition(TRANSIT_FRAGMENT_CLOSE)
-                        .commit();
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentConditions.CONDITION_FOUR.replace(baseFragment, settingsFragment, fm);
             break;
 
             case R.id.action_share:
@@ -143,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_back_sv:
                 updToDb(fetchData(EDIT_NOTE));
-                CONDITION_SAVE.someMethod(baseFragment, null);
+                CONDITION_SAVE.replace(baseFragment, null, null);
 
                 if (!baseFragment.isVisible()) {
                     startActivity(new Intent(this, MainActivity.class));

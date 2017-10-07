@@ -113,7 +113,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.theme_minimal:
-
+                Toast.makeText(getContext(), "working", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.btn_display_date:
