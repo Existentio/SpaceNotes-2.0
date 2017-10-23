@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name=".ui.SettingsActivity"
-            android:parentActivityName=".ui.MainActivity"></activity>
+            android:parentActivityName=".ui.MainActivity" />
     </application>
 
 </manifest>

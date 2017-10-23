@@ -6,9 +6,10 @@
 
     <color name="white">#f9ffffff</color>
 
+    <color name="deep_purple">#673AB7</color>
 
     <color name="newitem">#c1121954</color>
-    <color name="newitem_edit">#121954</color>
+    <color name="newitem_edit">#94121954</color>
 
     <color name="neo_text">#84FFFF</color>
     <color name="text_menu">#FFCDD2</color>
@@ -23,6 +24,16 @@
     <color name="neo_text_half">#3a84ffff</color>
 
     <color name="black_dim">#9d000000</color>
+
+    <!--themes-->
+    <color name="mars">#FDD835</color>
+    <color name="mars_middle">#81fdd835</color>
+
+    <color name="mars_half">#27fdd835</color>
+
+    <color name="neo_green">#76FF03</color>
+    <color name="light_green">#DCEDC8</color>
+
 
 
 

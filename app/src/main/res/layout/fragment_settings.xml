@@ -30,7 +30,6 @@
             android:layout_row="1"
             android:background="@drawable/new_settings"
             android:gravity="center"
-
             android:padding="10dp"
             android:text="Космос"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -109,7 +108,7 @@
         android:layout_gravity="center"
         android:layout_row="1"
         android:background="?attr/selectableItemBackground"
-        app:srcCompat="@drawable/hexagon" />
+        app:srcCompat="@drawable/button_menu_selector" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -130,7 +129,7 @@
         android:layout_gravity="center"
         android:layout_row="2"
         android:background="?attr/selectableItemBackground"
-        app:srcCompat="@drawable/hexagon" />
+        app:srcCompat="@drawable/button_menu_selector" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -150,7 +149,7 @@
         android:layout_gravity="center"
         android:layout_row="2"
         android:background="?attr/selectableItemBackground"
-        app:srcCompat="@drawable/hexagon" />
+        app:srcCompat="@drawable/button_menu_selector" />
 
 
     <TextView
@@ -174,31 +173,8 @@
         android:background="?attr/selectableItemBackground"
         android:orientation="vertical">
 
-        <!--<ImageButton-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_margin="5dp"-->
-            <!--android:background="?attr/selectableItemBackground"-->
-            <!--app:srcCompat="@drawable/hexagon_menu" />-->
-
-
-
     </LinearLayout>
 
-
-    <!--<ImageButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_column="0"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_row="3"-->
-        <!--android:background="?attr/selectableItemBackground"-->
-        <!--android:text="Вид"-->
-
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"-->
-        <!--android:textColor="@color/text_menu"-->
-        <!--app:srcCompat="@drawable/ic_grid_24dp" />-->
 
     <ImageButton
         android:id="@+id/btn_view"
@@ -208,7 +184,7 @@
         android:layout_gravity="center"
         android:layout_row="3"
         android:background="?attr/selectableItemBackground"
-        app:srcCompat="@drawable/hexagon" />
+        app:srcCompat="@drawable/button_menu_selector" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -221,35 +197,66 @@
         android:textColor="@color/text_menu" />
 
     <LinearLayout
-        android:id="@+id/testtt55"
+        android:id="@+id/ll_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_column="2"
         android:layout_gravity="center"
         android:layout_row="4"
+        android:visibility="invisible"
         android:background="?attr/selectableItemBackground"
         android:orientation="vertical">
 
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_column="1"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:layout_row="1"
-            android:background="?attr/selectableItemBackground"
-            app:srcCompat="@drawable/hexagon_menu" />
+        <!--<ImageButton-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_column="1"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:layout_row="1"-->
+        <!--android:background="?attr/selectableItemBackground"-->
+        <!--app:srcCompat="@drawable/hexagon_menu" />-->
 
-        <ImageButton
-            android:layout_width="50dp"
+        <!--<ImageButton-->
+        <!--android:layout_width="50dp"-->
 
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_column="1"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:layout_row="1"-->
+        <!--android:background="?attr/selectableItemBackground"-->
+        <!--app:srcCompat="@drawable/hexagon_menu" />-->
+
+        <TextView
+            android:id="@+id/view_lines"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_column="1"
+            android:layout_column="2"
             android:layout_gravity="center"
-            android:layout_margin="5dp"
+            android:layout_marginTop="10dp"
             android:layout_row="1"
-            android:background="?attr/selectableItemBackground"
-            app:srcCompat="@drawable/hexagon_menu" />
+            android:background="@drawable/new_settings"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Линии"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_menu" />
+
+        <TextView
+            android:id="@+id/view_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_column="2"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_row="1"
+            android:background="@drawable/new_settings"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Сетка"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/text_menu" />
 
     </LinearLayout>
 </GridLayout>

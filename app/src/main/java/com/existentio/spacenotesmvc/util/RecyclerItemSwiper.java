@@ -3,8 +3,9 @@ package com.existentio.spacenotesmvc.util;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 
-import com.existentio.spacenotesmvc.controller.DBHelper;
+import com.existentio.spacenotesmvc.data.DBHelper;
 import com.existentio.spacenotesmvc.model.Notes;
 import com.existentio.spacenotesmvc.ui.NoteItemAdapter;
 
@@ -42,10 +43,15 @@ public class RecyclerItemSwiper extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
         final int position = viewHolder.getAdapterPosition();
-        adapter.notifyItemRemoved(position);    //item removed from recylcerview
+
         int newId = adapter.getListId();
         db.delNote(newId);
         list.remove(position);
+
+        Log.d("item position", String.valueOf(position));
+        Log.d("list id", String.valueOf(position));
+        adapter.notifyItemRemoved(position);    //item removed from recylcerview
+        adapter.notifyItemRangeChanged(position, adapter.getItemCount());
     }
 }
 

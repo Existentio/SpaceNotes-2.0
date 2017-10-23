@@ -70,9 +70,6 @@ public enum FragmentConditions {
         }
     };
 
-//    CONDITION_SIX {
-//
-//    };
 
     public abstract void replace(Fragment base, Fragment fragment, FragmentManager fm);
 

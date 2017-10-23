@@ -9,20 +9,6 @@
     android:padding="@dimen/activity_vertical_margin"
     tools:context="com.existentio.spacenotesmvc.ui.AddNoteFragment">
 
-    <!--<android.support.v7.widget.Toolbar-->
-    <!--android:id="@+id/toolbar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="?attr/actionBarSize"-->
-    <!--android:background="@drawable/neo_design_text"-->
-    <!--app:popupTheme="@style/AppTheme.PopupOverlay">-->
-
-    <!--<ImageButton-->
-    <!--android:id="@+id/button_back"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="?android:attr/selectableItemBackground"-->
-    <!--app:srcCompat="@drawable/ic_menu_space_back" />-->
-    <!--</android.support.v7.widget.Toolbar>-->
 
     <LinearLayout
         android:id="@+id/ll_text_add"
@@ -43,4 +29,5 @@
             android:textColor="@color/white"
             android:textColorHint="@color/neo_text" />
     </LinearLayout>
+
 </LinearLayout>

@@ -10,5 +10,9 @@
 
     <string name="hint_text">Введите текст..</string>
     <string name="send_to">Отправить в...</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

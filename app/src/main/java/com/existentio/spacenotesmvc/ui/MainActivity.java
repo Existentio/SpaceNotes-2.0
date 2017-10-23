@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,8 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.existentio.spacenotesmvc.R;
-import com.existentio.spacenotesmvc.controller.DBHelper;
-import com.existentio.spacenotesmvc.data.PrefHelper;
+import com.existentio.spacenotesmvc.data.DBHelper;
+import com.existentio.spacenotesmvc.util.PrefHelper;
 import com.existentio.spacenotesmvc.model.Notes;
 import com.existentio.spacenotesmvc.util.FragmentConditions;
 
@@ -86,8 +87,11 @@ public class MainActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE);
 
         if (spTheme.contains(PrefHelper.KEY_THEME)) {
-//            container.setBackgroundResource(R.drawable.menu_background);
             container.setBackgroundResource(R.drawable.spacetheme);
+        } else if (spTheme.contains(PrefHelper.KEY_THEME_WASTELAND)) {
+            container.setBackgroundResource(R.drawable.mars_theme);
+        } else if (spTheme.contains(PrefHelper.KEY_THEME_MINIMAL)) {
+            container.setBackgroundColor(ContextCompat.getColor(this, android.R.color.black));
         }
 
         if (spDate.contains(PrefHelper.KEY_DATE)) {
@@ -116,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_save:
-                Toast.makeText(this, "Note have saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Запись сохранена", Toast.LENGTH_LONG).show();
                 saveToDb(fetchData(ADD_NOTE));
                 CONDITION_SAVE.replace(baseFragment, null, null);
                 break;
@@ -128,11 +132,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings_internal:
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentConditions.CONDITION_FOUR.replace(baseFragment, settingsFragment, fm);
-            break;
-
-            case R.id.action_share:
                 break;
 
+//
             case R.id.action_back_sv:
                 updToDb(fetchData(EDIT_NOTE));
                 CONDITION_SAVE.replace(baseFragment, null, null);
@@ -144,11 +146,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
 
-//
-//
-//
 //            case R.id.action_share:
-//                String contents = EditNoteFragment.newInstance().textView.getText().toString();
+//                String contents = EditNoteFragment.newInstance().text.getText().toString();
 //                if (contents.equals("")) {
 //
 //                } else {
@@ -160,8 +159,6 @@ public class MainActivity extends AppCompatActivity {
 //                        startActivity(Intent.createChooser(intent, getResources().getText(R.string.send_to)));
 //                }
 //                break;
-//
-
         }
         return true;
     }
@@ -180,10 +177,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveToDb(String... data) {
         if (data[0].isEmpty()) {
-            Toast.makeText(this, "empty note", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Нет записей", Toast.LENGTH_SHORT).show();
         } else {
             db.addNote(data[0], data[1]);
-            Toast.makeText(this, "note added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Запись добавлена", Toast.LENGTH_SHORT).show();
             onBackPressed();
         }
     }
@@ -192,11 +189,11 @@ public class MainActivity extends AppCompatActivity {
         long _id = Long.parseLong(data[2]);
 
         if (data[0].isEmpty()) {
-            Toast.makeText(this, "empty note", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Нет записей", Toast.LENGTH_SHORT).show();
         } else {
             db.updNote(data[0], data[1], _id);
             Log.d("id", String.valueOf(adapter.getListId()));
-            Toast.makeText(this, "rarara!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Запись обновлена", Toast.LENGTH_SHORT).show();
             onBackPressed();
         }
     }

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.existentio.spacenotesmvc.R;
 
@@ -28,5 +30,6 @@ public class SettingsActivity extends AppCompatActivity {
     public void onBackPressed() {
         NavUtils.navigateUpFromSameTask(this);
     }
+
 
 }

@@ -14,10 +14,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.existentio.spacenotesmvc.R;
-import com.existentio.spacenotesmvc.data.PrefHelper;
+import com.existentio.spacenotesmvc.util.PrefHelper;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 
@@ -25,9 +24,14 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     private ImageButton btnDate;
     private ImageButton btnFont;
     private ImageButton btnView;
+
     private LinearLayout llTop;
-    private TextView themeSpace;
-    private TextView themeWasteland;
+    private LinearLayout llView;
+
+    private TextView themeSpace, themeWasteland, themeMinimal;
+    private TextView viewLines, viewGrid;
+
+    private PrefHelper prefHelper;
 
     public SettingsFragment() {
     }
@@ -39,6 +43,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         setHasOptionsMenu(true);
 
         llTop = (LinearLayout) view.findViewById(R.id.top_ll);
+        llView = (LinearLayout)view.findViewById(R.id.ll_bottom);
 
         btnTheme = (ImageButton) view.findViewById(R.id.btn_theme);
         btnDate = (ImageButton) view.findViewById(R.id.btn_display_date);
@@ -47,9 +52,16 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
         themeSpace = (TextView) view.findViewById(R.id.theme_space);
         themeWasteland = (TextView) view.findViewById(R.id.theme_wasteland);
+        themeMinimal = (TextView) view.findViewById(R.id.theme_minimal);
+
+        viewLines = (TextView)view.findViewById(R.id.view_lines);
+        viewGrid = (TextView)view.findViewById(R.id.view_grid);
+
 
         attachListeners(btnTheme, btnView, btnDate, btnFont,
-                themeSpace, themeWasteland);
+                themeSpace, themeWasteland, themeMinimal, viewLines, viewGrid);
+
+        prefHelper = new PrefHelper();
         return view;
     }
 
@@ -102,25 +114,28 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.theme_space:
-                PrefHelper prefHelper = new PrefHelper();
                 prefHelper.setPref("pref_theme");
-                PrefHelper.putInSharedPrefs(prefHelper.getPref(), getContext(), "theme", "first");
+                PrefHelper.putInSharedPrefs(prefHelper.getPref(), getContext(), "theme", "");
                 startActivity(new Intent(getContext(), MainActivity.class));
                 break;
 
             case R.id.theme_wasteland:
-                Toast.makeText(getContext(), "working", Toast.LENGTH_SHORT).show();
+                prefHelper.setPref("pref_theme");
+                PrefHelper.putInSharedPrefs(prefHelper.getPref(), getContext(), "theme_wasteland", "");
+                startActivity(new Intent(getContext(), MainActivity.class));
                 break;
 
             case R.id.theme_minimal:
-                Toast.makeText(getContext(), "working", Toast.LENGTH_SHORT).show();
+                prefHelper.setPref("pref_theme");
+                PrefHelper.putInSharedPrefs(prefHelper.getPref(), getContext(), "theme_minimal", "");
+                startActivity(new Intent(getContext(), MainActivity.class));
                 break;
 
             case R.id.btn_display_date:
 //                btnDate.setBackgroundResource(R.drawable.hexagon_pressed);
                 PrefHelper prefDate = new PrefHelper();
                 prefDate.setPref("pref_date");
-                PrefHelper.putInSharedPrefs(prefDate.getPref(), getContext(), "theme", "first");
+                PrefHelper.putInSharedPrefs(prefDate.getPref(), getContext(), "date", "");
                 break;
 
             case R.id.btn_font:
@@ -128,7 +143,22 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btn_view:
+                if (!llView.isShown()) {
+                    llView.setVisibility(View.VISIBLE);
+                    animButtons(llView);
+                } else llView.setVisibility(View.INVISIBLE);
+                break;
 
+            case R.id.view_lines:
+                prefHelper.setPref("pref_view");
+                PrefHelper.putInSharedPrefs(prefHelper.getPref(), getContext(), "view_lines", "");
+                startActivity(new Intent(getContext(), MainActivity.class));
+                break;
+
+            case R.id.view_grid:
+                prefHelper.setPref("pref_view");
+                PrefHelper.putInSharedPrefs(prefHelper.getPref(), getContext(), "view_grid", "");
+                startActivity(new Intent(getContext(), MainActivity.class));
                 break;
 
 

@@ -1,19 +1,25 @@
 package com.existentio.spacenotesmvc.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.existentio.spacenotesmvc.R;
+import com.existentio.spacenotesmvc.util.PrefHelper;
 
 public class AddNoteFragment extends Fragment {
 
-     EditText etText;
+    EditText etText;
+    LinearLayout container;
 
     public AddNoteFragment() {
         // Required empty public constructor
@@ -29,7 +35,8 @@ public class AddNoteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            etText = (EditText)getActivity().findViewById(R.id.et_enter_text);
+
+        etText = (EditText) getActivity().findViewById(R.id.et_enter_text);
     }
 
     @Override
@@ -58,6 +65,19 @@ public class AddNoteFragment extends Fragment {
         getActivity().getMenuInflater().inflate(R.menu.menu_add_note, menu);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        SharedPreferences spTheme = getActivity().getSharedPreferences(PrefHelper.PREF_THEME,
+                Context.MODE_PRIVATE);
+        container = (LinearLayout) getActivity().findViewById(R.id.ll_text_add);
+
+        if (spTheme.contains(PrefHelper.KEY_THEME_WASTELAND)) {
+            container.setBackgroundResource(R.drawable.wasteland_design_edit_text);
+        } else if (spTheme.contains(PrefHelper.KEY_THEME_MINIMAL)) {
+            container.setBackgroundColor(ContextCompat.getColor(getActivity(), android.R.color.black));
+        }
+    }
 
 
 }

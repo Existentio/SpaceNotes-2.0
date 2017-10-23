@@ -1,4 +1,4 @@
-package com.existentio.spacenotesmvc.controller;
+package com.existentio.spacenotesmvc.data;
 
 import android.content.ContentValues;
 import android.content.Context;

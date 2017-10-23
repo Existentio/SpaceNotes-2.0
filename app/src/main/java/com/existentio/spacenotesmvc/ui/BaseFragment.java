@@ -1,9 +1,12 @@
 package com.existentio.spacenotesmvc.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,14 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.existentio.spacenotesmvc.R;
-import com.existentio.spacenotesmvc.controller.DBHelper;
+import com.existentio.spacenotesmvc.data.DBHelper;
+import com.existentio.spacenotesmvc.util.PrefHelper;
 import com.existentio.spacenotesmvc.model.Notes;
 import com.existentio.spacenotesmvc.util.FragmentConditions;
 import com.existentio.spacenotesmvc.util.RecyclerItemSwiper;
 
 import java.util.List;
 
-import static android.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
 import static android.support.v7.widget.helper.ItemTouchHelper.LEFT;
 import static android.support.v7.widget.helper.ItemTouchHelper.RIGHT;
 import static com.existentio.spacenotesmvc.ui.MainActivity.notes;
@@ -28,9 +31,10 @@ public class BaseFragment extends Fragment implements NoteItemAdapter.OnItemClic
 
     private OnFragmentInteractionListener mListener;
     private LinearLayoutManager mLayoutManager;
+    private GridLayoutManager mGridLayoutManager;
+
     private NoteItemAdapter adapter;
     private DBHelper db;
-
     private RecyclerView mContainer;
 
     public static BaseFragment newInstance() {
@@ -53,6 +57,7 @@ public class BaseFragment extends Fragment implements NoteItemAdapter.OnItemClic
         View view = inflater.inflate(R.layout.fragment_base, container, false);
         mContainer = (RecyclerView) view.findViewById(R.id.rv_base);
         mLayoutManager = new LinearLayoutManager(getActivity());
+        mGridLayoutManager = new GridLayoutManager(getContext(), 4);
         adapter = new NoteItemAdapter(getActivity());
         adapter.setListener(this);
         mContainer.setLayoutManager(mLayoutManager);
@@ -75,10 +80,13 @@ public class BaseFragment extends Fragment implements NoteItemAdapter.OnItemClic
     public void onResume() {
         super.onResume();
 
-        adapter.notifyDataSetChanged();
-    }
+        SharedPreferences spView = getActivity().getSharedPreferences(PrefHelper.PREF_VIEW,
+                Context.MODE_PRIVATE);
 
-    public void refresh() {
+        if (spView.contains("view_grid")) {
+            mContainer.setLayoutManager(mGridLayoutManager);
+        }
+
         adapter.notifyDataSetChanged();
 
     }

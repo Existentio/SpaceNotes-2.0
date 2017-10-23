@@ -1,13 +1,17 @@
 package com.existentio.spacenotesmvc.ui;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.existentio.spacenotesmvc.R;
+import com.existentio.spacenotesmvc.util.PrefHelper;
 import com.existentio.spacenotesmvc.model.Notes;
 
 import java.util.ArrayList;
@@ -38,6 +42,7 @@ public class NoteItemAdapter extends RecyclerView.Adapter<NoteItemAdapter.ViewHo
 
     @Override
     public NoteItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         return new ViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.note_item, parent, false));
     }
@@ -60,11 +65,16 @@ public class NoteItemAdapter extends RecyclerView.Adapter<NoteItemAdapter.ViewHo
                 }
             }
         });
+
+        //init row view based on preferences
+        initSettings(holder);
+
         holder.itemView.setTag(note);
     }
 
+
     public void setListId(int id) {
-       NOTE_ID = id;
+        NOTE_ID = id;
     }
 
     public int getListId() {
@@ -79,15 +89,35 @@ public class NoteItemAdapter extends RecyclerView.Adapter<NoteItemAdapter.ViewHo
     public interface OnItemClickListener {
         void onItemSelected(Notes noteItem);
     }
-    
-    public class ViewHolder extends RecyclerView.ViewHolder { //was non-static
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView description;
         private TextView date;
+        private LinearLayout itemLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             description = (TextView) itemView.findViewById(R.id.note_description);
             date = (TextView) itemView.findViewById(R.id.note_date);
+            itemLayout = (LinearLayout) itemView.findViewById(R.id.row_layout);
+
+        }
+    }
+
+    private void initSettings(ViewHolder holder) {
+        SharedPreferences spTheme = mContext.getSharedPreferences(PrefHelper.PREF_THEME,
+                Context.MODE_PRIVATE);
+        if (spTheme.contains(PrefHelper.KEY_THEME_WASTELAND)) {
+            holder.itemLayout.setBackgroundResource(R.drawable.mars_design);
+            holder.description.setTextColor(ContextCompat.getColor(mContext, R.color.mars));
+            holder.date.setTextColor(ContextCompat.getColor(mContext, R.color.mars));
+
+        } else if (spTheme.contains(PrefHelper.KEY_THEME_MINIMAL)) {
+            holder.itemLayout.setBackgroundResource(R.drawable.minimal_theme);
+            holder.description.setTextColor(ContextCompat.getColor(mContext, R.color.neo_green));
+            holder.date.setTextColor(ContextCompat.getColor(mContext, R.color.neo_green));
         }
     }
 }
+
+
