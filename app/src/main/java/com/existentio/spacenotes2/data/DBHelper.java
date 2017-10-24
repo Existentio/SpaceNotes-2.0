@@ -1,4 +1,4 @@
-package com.existentio.spacenotesmvc.data;
+package com.existentio.spacenotes2.data;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,8 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.existentio.spacenotesmvc.model.Notes;
-import com.existentio.spacenotesmvc.ui.MainActivity;
+import com.existentio.spacenotes2.model.Notes;
+import com.existentio.spacenotes2.ui.MainActivity;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_DATE = "date";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     private static final String CREATE_TABLE_NOTES =
             "CREATE TABLE " + TABLE_NOTES + "(" +

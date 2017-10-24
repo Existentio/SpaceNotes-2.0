@@ -1,4 +1,4 @@
-package com.existentio.spacenotesmvc;
+package com.existentio.spacenotes2;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.existentio.spacenotesmvc", appContext.getPackageName());
+        assertEquals("com.existentio.spacenotes2", appContext.getPackageName());
     }
 }

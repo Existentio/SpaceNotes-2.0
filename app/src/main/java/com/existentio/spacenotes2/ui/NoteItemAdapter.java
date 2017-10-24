@@ -1,4 +1,4 @@
-package com.existentio.spacenotesmvc.ui;
+package com.existentio.spacenotes2.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.existentio.spacenotesmvc.R;
-import com.existentio.spacenotesmvc.util.PrefHelper;
-import com.existentio.spacenotesmvc.model.Notes;
+import com.existentio.spacenotes2.R;
+import com.existentio.spacenotes2.util.PrefHelper;
+import com.existentio.spacenotes2.model.Notes;
 
 import java.util.ArrayList;
 import java.util.List;

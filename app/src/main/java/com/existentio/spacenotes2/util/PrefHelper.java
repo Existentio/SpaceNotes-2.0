@@ -1,4 +1,4 @@
-package com.existentio.spacenotesmvc.util;
+package com.existentio.spacenotes2.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

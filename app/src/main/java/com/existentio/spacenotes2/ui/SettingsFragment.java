@@ -1,4 +1,4 @@
-package com.existentio.spacenotesmvc.ui;
+package com.existentio.spacenotes2.ui;
 
 
 import android.content.Intent;
@@ -15,8 +15,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.existentio.spacenotesmvc.R;
-import com.existentio.spacenotesmvc.util.PrefHelper;
+import com.existentio.spacenotes2.R;
+import com.existentio.spacenotes2.util.PrefHelper;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 

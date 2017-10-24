@@ -1,10 +1,10 @@
-package com.existentio.spacenotesmvc.util;
+package com.existentio.spacenotes2.util;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import com.existentio.spacenotesmvc.R;
-import com.existentio.spacenotesmvc.ui.SettingsFragment;
+import com.existentio.spacenotes2.R;
+import com.existentio.spacenotes2.ui.SettingsFragment;
 
 import static android.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
 import static android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE;

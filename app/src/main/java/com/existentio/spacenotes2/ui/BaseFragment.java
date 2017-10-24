@@ -1,4 +1,4 @@
-package com.existentio.spacenotesmvc.ui;
+package com.existentio.spacenotes2.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,18 +13,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.existentio.spacenotesmvc.R;
-import com.existentio.spacenotesmvc.data.DBHelper;
-import com.existentio.spacenotesmvc.util.PrefHelper;
-import com.existentio.spacenotesmvc.model.Notes;
-import com.existentio.spacenotesmvc.util.FragmentConditions;
-import com.existentio.spacenotesmvc.util.RecyclerItemSwiper;
+import com.existentio.spacenotes2.R;
+import com.existentio.spacenotes2.data.DBHelper;
+import com.existentio.spacenotes2.util.PrefHelper;
+import com.existentio.spacenotes2.model.Notes;
+import com.existentio.spacenotes2.util.FragmentConditions;
+import com.existentio.spacenotes2.util.RecyclerItemSwiper;
 
 import java.util.List;
 
 import static android.support.v7.widget.helper.ItemTouchHelper.LEFT;
 import static android.support.v7.widget.helper.ItemTouchHelper.RIGHT;
-import static com.existentio.spacenotesmvc.ui.MainActivity.notes;
+import static com.existentio.spacenotes2.ui.MainActivity.notes;
 
 
 public class BaseFragment extends Fragment implements NoteItemAdapter.OnItemClickListener {

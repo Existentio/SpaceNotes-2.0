@@ -1,13 +1,13 @@
-package com.existentio.spacenotesmvc.util;
+package com.existentio.spacenotes2.util;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 
-import com.existentio.spacenotesmvc.data.DBHelper;
-import com.existentio.spacenotesmvc.model.Notes;
-import com.existentio.spacenotesmvc.ui.NoteItemAdapter;
+import com.existentio.spacenotes2.data.DBHelper;
+import com.existentio.spacenotes2.model.Notes;
+import com.existentio.spacenotes2.ui.NoteItemAdapter;
 
 import java.util.List;
 

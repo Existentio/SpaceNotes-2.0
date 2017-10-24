@@ -1,4 +1,4 @@
-package com.existentio.spacenotesmvc.ui;
+package com.existentio.spacenotes2.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,20 +15,20 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.existentio.spacenotesmvc.R;
-import com.existentio.spacenotesmvc.data.DBHelper;
-import com.existentio.spacenotesmvc.util.PrefHelper;
-import com.existentio.spacenotesmvc.model.Notes;
-import com.existentio.spacenotesmvc.util.FragmentConditions;
+import com.existentio.spacenotes2.R;
+import com.existentio.spacenotes2.data.DBHelper;
+import com.existentio.spacenotes2.util.PrefHelper;
+import com.existentio.spacenotes2.model.Notes;
+import com.existentio.spacenotes2.util.FragmentConditions;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static com.existentio.spacenotesmvc.util.FragmentConditions.CONDITION_ADD;
-import static com.existentio.spacenotesmvc.util.FragmentConditions.CONDITION_SAVE;
-import static com.existentio.spacenotesmvc.util.FragmentConditions.CONDITION_SETTINGS;
+import static com.existentio.spacenotes2.util.FragmentConditions.CONDITION_ADD;
+import static com.existentio.spacenotes2.util.FragmentConditions.CONDITION_SAVE;
+import static com.existentio.spacenotes2.util.FragmentConditions.CONDITION_SETTINGS;
 
 public class MainActivity extends AppCompatActivity {
     public static List<Notes> notes = new ArrayList<>();

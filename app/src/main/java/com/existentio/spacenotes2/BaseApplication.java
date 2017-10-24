@@ -1,4 +1,4 @@
-package com.existentio.spacenotesmvc;
+package com.existentio.spacenotes2;
 
 import android.app.Application;
 

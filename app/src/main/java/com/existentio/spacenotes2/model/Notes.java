@@ -1,4 +1,4 @@
-package com.existentio.spacenotesmvc.model;
+package com.existentio.spacenotes2.model;
 
 /**
  * Created by Георгий on 19.09.2017.

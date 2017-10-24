@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.existentio.spacenotesmvc.ui.BaseFragment">
+    tools:context="com.existentio.spacenotes2.ui.BaseFragment">
 
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="?attr/actionBarSize"

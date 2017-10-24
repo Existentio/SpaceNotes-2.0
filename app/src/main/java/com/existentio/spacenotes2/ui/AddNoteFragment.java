@@ -1,4 +1,4 @@
-package com.existentio.spacenotesmvc.ui;
+package com.existentio.spacenotes2.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.existentio.spacenotesmvc.R;
-import com.existentio.spacenotesmvc.util.PrefHelper;
+import com.existentio.spacenotes2.R;
+import com.existentio.spacenotes2.util.PrefHelper;
 
 public class AddNoteFragment extends Fragment {
 
